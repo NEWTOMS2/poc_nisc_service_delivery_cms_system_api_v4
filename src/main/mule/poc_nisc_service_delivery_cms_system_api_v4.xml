@@ -40,7 +40,7 @@ output application/json
                 </ee:transform>
             </on-error-propagate>
             <on-error-propagate type="APIKIT:NOT_FOUND">
-                <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+                <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:id="da6e843e-ff8f-4093-81e8-89d04d669ce9">
                     <ee:message>
                         <ee:set-payload><![CDATA[%dw 2.0
 output application/json
@@ -143,8 +143,9 @@ output application/json
                     </ee:variables>
                 </ee:transform>
             </on-error-propagate>
-            <on-error-propagate type="APIKIT:NOT_IMPLEMENTED">
-                <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:id="06974fcf-1aa3-402e-9a46-e21857e7e415">
+            <on-error-propagate type="ANY" enableNotifications="true" logException="true">
+                <logger level="ERROR" doc:name="Logger" doc:id="c9507d28-9427-45ea-b6b8-2f5d0f9e94fc" message="CHECK: #[error]"/>
+				<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:id="06974fcf-1aa3-402e-9a46-e21857e7e415">
                     <ee:message>
                         <ee:set-payload><![CDATA[%dw 2.0
 output application/json
@@ -157,7 +158,7 @@ output application/json
             code:"ERR500",
             status:"500",
             title:"Internal Server Error",
-            detail:"",
+            detail:error.detailedDescription,
             href:"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html"
          }
       ]
@@ -165,7 +166,7 @@ output application/json
 }]]></ee:set-payload>
                     </ee:message>
                     <ee:variables>
-                        <ee:set-variable variableName="httpStatus"><![CDATA[501]]></ee:set-variable>
+                        <ee:set-variable variableName="httpStatus"><![CDATA[500]]></ee:set-variable>
                     </ee:variables>
                 </ee:transform>
             </on-error-propagate>
