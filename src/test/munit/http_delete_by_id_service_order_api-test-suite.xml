@@ -39,7 +39,7 @@ payload]]></ee:set-payload>
 			</ee:transform>
 </munit:execution>
 		<munit:validation>
-			<munit-tools:assert-that doc:name="Copy_of_Assert that Response Message is the expected Message" doc:id="63ab93d2-d4d0-43e1-9c5d-f05183df3cf3" expression="#[payload]" is="#[MunitTools::equalTo('' default '')]" message="Response Message is Null!!" />
+			<munit-tools:assert-that doc:name="Assert that Response Message is the expected Message" doc:id="63ab93d2-d4d0-43e1-9c5d-f05183df3cf3" expression="#[payload]" is="#[MunitTools::equalTo('' default '')]" message="Response Message is Null!!" />
 </munit:validation>
 	
 </munit:test>
