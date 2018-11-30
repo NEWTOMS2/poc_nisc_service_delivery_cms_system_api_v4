@@ -192,9 +192,9 @@ output application/json
         <flow-ref doc:name="createAServiceOrderToProcess" doc:id="28bc46f8-9a05-4033-b760-0df5730599d8" name="createAServiceOrderToProcess"/>
     </flow>
     <sub-flow name="setOrderIdVaribleFromURIId" doc:id="a0c0ff38-fd7d-4739-9a1b-7f47cbc11ef8" >
-		<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
+		<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" doc:id="dfc18679-fa84-4c1c-b76f-f9ab1c74936b">
             <ee:variables>
-                <ee:set-variable variableName="id">attributes.uriParams.id</ee:set-variable>
+                <ee:set-variable variableName="id"><![CDATA[attributes.uriParams.id]]></ee:set-variable>
             </ee:variables>
         </ee:transform>
 	</sub-flow>
