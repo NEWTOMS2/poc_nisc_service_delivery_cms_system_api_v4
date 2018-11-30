@@ -179,6 +179,7 @@ output application/json
     <flow name="delete:\service\order\(id):poc_nisc_service_delivery_cms_system_api_v4-config">
         <flow-ref doc:name="setOrderIdVaribleFromURIId" doc:id="644e6809-d76f-45b7-ae79-13dc971846eb" name="setOrderIdVaribleFromURIId"/>
         <flow-ref doc:name="deleteServiceOrderById" doc:id="b2a682de-765e-40d6-ad1c-1dc500161dd5" name="deleteServiceOrderById"/>
+		<set-payload value="#[null]" doc:name="Set null Payload" doc:id="4b3ece0e-634d-481c-905a-938c254b60c2" />
 		<logger level="INFO" message="delete:\service\order\(id):poc_nisc_service_delivery_cms_system_api_v4-config" />
     </flow>
     <flow name="get:\service\order:poc_nisc_service_delivery_cms_system_api_v4-config">
