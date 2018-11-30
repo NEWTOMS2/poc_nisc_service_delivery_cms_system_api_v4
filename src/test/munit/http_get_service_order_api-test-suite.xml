@@ -41,7 +41,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<munit:test name="FuntionalTest-GivenARequestWhenGetAllServiceOrdersThenReturnAHTTPSTATUS200" description="FuntionalTest-GivenARequestWhenGetAllServiceOrdersThenReturnAHTTPSTATUS200" doc:id="f7803af1-cfea-4a94-b782-2f02afb12f19">
 		<munit:enable-flow-sources >
 			<munit:enable-flow-source value="poc_nisc_service_delivery_cms_system_api_v4-main" />
-			<munit:enable-flow-source value="post:\service\order:application\json:poc_nisc_service_delivery_cms_system_api_v4-config" />
+			<munit:enable-flow-source value="get:\service\order:poc_nisc_service_delivery_cms_system_api_v4-config" />
 		</munit:enable-flow-sources>
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="Mock when call getAllServiceOrderByFilters" doc:id="d7289bfd-f97c-48b5-bba9-831c1534a9da" processor="mule:flow-ref" >
@@ -66,7 +66,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<munit:test name="FuntionalTest-GivenARequestWhenGetAllServiceOrdersThenReturnExpectedContentType" description="FuntionalTest-GivenARequestWhenGetAllServiceOrdersThenReturnExpectedContentType" doc:id="dbf1b8d4-b0ea-4e35-9e18-3e24d7cf026f">
 		<munit:enable-flow-sources >
 			<munit:enable-flow-source value="poc_nisc_service_delivery_cms_system_api_v4-main" />
-			<munit:enable-flow-source value="post:\service\order:application\json:poc_nisc_service_delivery_cms_system_api_v4-config" />
+			<munit:enable-flow-source value="get:\service\order:poc_nisc_service_delivery_cms_system_api_v4-config" />
 		</munit:enable-flow-sources>
 		<munit:behavior>
 			<munit-tools:mock-when doc:name="Mock when call getAllServiceOrderByFilters" doc:id="46f6e395-06f9-4c7e-8c8c-c63a839e6366" processor="mule:flow-ref" >
@@ -91,7 +91,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<munit:test name="FuntionalTest-GivenARequestWhenGetAllServiceOrdersThenVerifyThatTheRequestWasRoutedToRigthImplementation" description="FuntionalTest-GivenAUpdateServiceOrderRequestWhenPutRequestToServiceOrderAPIThenVerifyThatTheRequestWasRoutedToRigthImplementation" doc:id="9a8a3a8c-a23f-4224-a39b-1883ebd81c94">
 		<munit:enable-flow-sources >
 			<munit:enable-flow-source value="poc_nisc_service_delivery_cms_system_api_v4-main" />
-			<munit:enable-flow-source value="post:\service\order:application\json:poc_nisc_service_delivery_cms_system_api_v4-config" />
+			<munit:enable-flow-source value="get:\service\order:poc_nisc_service_delivery_cms_system_api_v4-config" />
 		</munit:enable-flow-sources>
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="Mock when call getAllServiceOrderByFilters" doc:id="99efed81-5881-4cce-b3c7-3f78c703a1e4" processor="mule:flow-ref" >

@@ -42,7 +42,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<munit:test name="FuntionalTest-GivenAUpdateServiceOrderRequestWhenPutRequestToServiceOrderAPIThenReturnAHTTPSTATUS200" description="FuntionalTest-GivenAUpdateServiceOrderRequestWhenPutRequestToServiceOrderAPIThenReturnAHTTPSTATUS200" doc:id="f7803af1-cfea-4a94-b782-2f02afb12f19">
 		<munit:enable-flow-sources >
 			<munit:enable-flow-source value="poc_nisc_service_delivery_cms_system_api_v4-main" />
-			<munit:enable-flow-source value="post:\service\order:application\json:poc_nisc_service_delivery_cms_system_api_v4-config" />
+			<munit:enable-flow-source value="put:\service\order\(id):application\json:poc_nisc_service_delivery_cms_system_api_v4-config" />
 		</munit:enable-flow-sources>
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="Mock when call updateServiceOrderById" doc:id="da6534ff-213d-4c6b-9cf7-fca8b70836fd" processor="mule:flow-ref" >
@@ -68,7 +68,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<munit:test name="FuntionalTest-GivenAUpdateServiceOrderRequestWhenPutRequestToServiceOrderAPIThenReturnExpectedContentType" description="FuntionalTest-GivenAUpdateServiceOrderRequestWhenPutRequestToServiceOrderAPIThenReturnExpectedContentType" doc:id="dbf1b8d4-b0ea-4e35-9e18-3e24d7cf026f">
 		<munit:enable-flow-sources >
 			<munit:enable-flow-source value="poc_nisc_service_delivery_cms_system_api_v4-main" />
-			<munit:enable-flow-source value="post:\service\order:application\json:poc_nisc_service_delivery_cms_system_api_v4-config" />
+			<munit:enable-flow-source value="put:\service\order\(id):application\json:poc_nisc_service_delivery_cms_system_api_v4-config" />
 		</munit:enable-flow-sources>
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="Mock when call updateServiceOrderById" doc:id="a3c36e09-bd9f-4ec6-a71a-d909e30c2306" processor="mule:flow-ref" >
@@ -93,7 +93,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<munit:test name="FuntionalTest-GivenAUpdateServiceOrderRequestWhenPutRequestToServiceOrderAPIThenVerifyThatTheRequestWasRoutedToRigthImplementation" description="FuntionalTest-GivenAUpdateServiceOrderRequestWhenPutRequestToServiceOrderAPIThenVerifyThatTheRequestWasRoutedToRigthImplementation" doc:id="9a8a3a8c-a23f-4224-a39b-1883ebd81c94">
 		<munit:enable-flow-sources >
 			<munit:enable-flow-source value="poc_nisc_service_delivery_cms_system_api_v4-main" />
-			<munit:enable-flow-source value="post:\service\order:application\json:poc_nisc_service_delivery_cms_system_api_v4-config" />
+			<munit:enable-flow-source value="put:\service\order\(id):application\json:poc_nisc_service_delivery_cms_system_api_v4-config" />
 		</munit:enable-flow-sources>
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="Mock when call updateServiceOrderById" doc:id="40058022-83ff-485b-a76a-23f551b84c01" processor="mule:flow-ref" >
@@ -115,6 +115,45 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 			<munit-tools:verify-call doc:name="Verify call" doc:id="1738e92a-ad7d-44bc-9adf-878c2a9ec3f4" processor="mule:flow-ref" >
 				<munit-tools:with-attributes >
 					<munit-tools:with-attribute attributeName="name" whereValue="updateServiceOrderById" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+
+</munit:validation>
+	</munit:test>
+	<munit:test name="FuntionalTest-GivenAUpdateServiceOrderRequestWhenPutRequestToServiceOrderAPIThenGetIdFromURI" description="FuntionalTest-GivenAUpdateServiceOrderRequestWhenPutRequestToServiceOrderAPIThenGetIdFromURI" doc:id="f14a825f-5174-40ba-8746-80d3aa54527b">
+		<munit:enable-flow-sources >
+			<munit:enable-flow-source value="poc_nisc_service_delivery_cms_system_api_v4-main" />
+			<munit:enable-flow-source value="put:\service\order\(id):application\json:poc_nisc_service_delivery_cms_system_api_v4-config" />
+		</munit:enable-flow-sources>
+		<munit:behavior >
+			<munit-tools:spy doc:name="Spy Call updateServiceOrderById" doc:id="2aeeb5ff-eed6-4edd-8983-ef92a723b146" processor="mule:flow-ref" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute attributeName="name" whereValue="updateServiceOrderById" />
+				</munit-tools:with-attributes>
+				<munit-tools:before-call >
+					<munit-tools:assert-that doc:name="Assert that Http URI Id Param is the expected" doc:id="872b7144-3bf9-4276-a9e9-f5f6e9212d17" expression="#[vars.id]" is="#[MunitTools::equalTo('1' default '0')]" message="Http URI Id Param is not the expected!!!" />
+				</munit-tools:before-call>
+			</munit-tools:spy>
+			<munit-tools:mock-when doc:name="Mock when call updateServiceOrderById" doc:id="5a751390-2f01-4efb-a30f-681beb9659bf" processor="mule:flow-ref">
+				<munit-tools:with-attributes>
+					<munit-tools:with-attribute attributeName="name" whereValue="updateServiceOrderById" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return>
+					<munit-tools:payload value="#[vars.putUpdateServiceOrderResponse]" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		
+
+</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="getUpdateServiceOrderRequestForTest" doc:id="a262fdca-4150-4918-9ebd-00a0f427e157" name="getUpdateServiceOrderRequestForTest"/>
+			<flow-ref doc:name="requestHTTPPUTUpdateServiceOrder" doc:id="48285301-920f-4ced-974b-2049a336218e" name="requestHTTPPUTUpdateServiceOrder" />
+
+</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="3fae2447-49ae-4185-a027-3709db8b58eb" processor="mule:flow-ref" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute attributeName="name" whereValue="setOrderIdVaribleFromURIId" />
 				</munit-tools:with-attributes>
 			</munit-tools:verify-call>
 
