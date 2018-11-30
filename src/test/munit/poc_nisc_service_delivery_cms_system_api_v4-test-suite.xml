@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="poc_nisc_service_delivery_cms_system_api_v4-test-suite.xml" />
+	<munit:before-test name="poc_nisc_service_delivery_cms_system_api_v4-test-suiteBefore_Test" description="Before tests actions" doc:id="b142719f-1a90-4902-88d8-565e0c8ff54c" >
+		<flow-ref doc:name="setExpectedPutUpdateServiceOrderResponse" doc:id="bbde02c0-3e35-4422-8e32-2c6fc41e0dd4" name="setExpectedPutUpdateServiceOrderResponse" />
+		<flow-ref doc:name="setExpectedPostCreateServiceResponse" doc:id="9e36e954-3ff7-4446-ab41-857186c0630b" name="setExpectedPostCreateServiceResponse" />
+		<flow-ref doc:name="setExpectedGellAllServiceOrdersByFilterResponse" doc:id="7490903d-dffc-4ff4-967e-05afa4cca4e5" name="setExpectedGellAllServiceOrdersByFilterResponse" />
+		<flow-ref doc:name="setExpectedPutUpdateServiceOrderResponse" doc:id="e590cd20-6ec1-4473-b59b-c3e45098c048" name="setExpectedPutUpdateServiceOrderResponse" />
+	</munit:before-test>
+	<munit:test name="GivenACreateServiceRequestWhenCallPostServiceOrderThenCallRightSteps" description="GivenACreateServiceRequestWhenCallPostServiceOrderThenCallRightSteps" doc:id="20941422-16a0-4b9a-9efa-718e2c8a3945" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when call createAServiceOrderToProcess" doc:id="b8f51ba1-7991-4430-ae25-7c05bf952be8" processor="mule:flow-ref" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute attributeName="name" whereValue="createAServiceOrderToProcess" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[vars.postCreateServiceResponse]" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="getCreateServiceRequestForTest" doc:id="905b571f-88f2-4449-9df3-5bb5609f7805" name="getCreateServiceRequestForTest"/>
+			<flow-ref doc:name="Flow-ref to post:\service\order:application\json:poc_nisc_service_delivery_cms_system_api_v4-config" doc:id="2d37d3f4-18c9-46ee-9a5d-7f7245eee395" name="post:\service\order:application\json:poc_nisc_service_delivery_cms_system_api_v4-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="5c258779-7044-4557-a465-806b0aab60c9" processor="mule:flow-ref" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute attributeName="name" whereValue="createAServiceOrderToProcess" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="GivenARequestIdWhenGetAServiceOrderByIdThenCallRightSteps" description="GivenARequestIdWhenGetAServiceOrderByIdThenCallRightSteps" doc:id="01797153-cfb2-4cb8-8e92-6b0e28298a0e" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when call getServiceOrderById" doc:id="8cc428cc-8039-4029-bf62-406affc1c717" processor="mule:flow-ref" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute attributeName="name" whereValue="getServiceOrderById" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[vars.putUpdateServiceOrderResponse]" mediaType="application/json" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\service\order\(id):poc_nisc_service_delivery_cms_system_api_v4-config" doc:id="73281fa9-4a5a-4845-a794-53d46dd8c7c6" name="get:\service\order\(id):poc_nisc_service_delivery_cms_system_api_v4-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call setOrderIdVaribleFromURIId" doc:id="f53a9075-4684-4c21-be09-434a065ec29d" processor="mule:flow-ref" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute attributeName="name" whereValue="setOrderIdVaribleFromURIId" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify call getServiceOrderById" doc:id="842d6dfc-e593-4689-981b-ca3e75203774" processor="mule:flow-ref" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute attributeName="name" whereValue="getServiceOrderById" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="GivenARequestWhenGetAllServiceOrdersThenCallRightSteps" description="GivenARequestWhenGetAllServiceOrdersThenCallRightSteps" doc:id="3510e27d-3ae1-4ea0-8237-fc08b9d9bbe9" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when call getAllServiceOrderByFilters" doc:id="8a7df394-cde5-498f-adba-a617d271ec1e" processor="mule:flow-ref" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute attributeName="name" whereValue="getAllServiceOrderByFilters" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[vars.expectedGellAllServiceOrdersByFilterResponse]" mediaType="application/json" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\service\order:poc_nisc_service_delivery_cms_system_api_v4-config" doc:id="59eda312-7dc4-40b8-b04c-db68199363df" name="get:\service\order:poc_nisc_service_delivery_cms_system_api_v4-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call" doc:id="1463d8fe-484a-46c6-a278-4ae87a369e31" processor="mule:flow-ref" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute attributeName="name" whereValue="getAllServiceOrderByFilters" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="GivenARequestIdWhenDeleteAServiceOrderByIdThenCallRightSteps" description="GivenARequestIdWhenDeleteAServiceOrderByIdThenCallRightSteps" doc:id="4239791c-1187-4b42-bbcb-04fa0cbc22cb" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when call deleteServiceOrderById" doc:id="6602f837-94ab-4f6d-905e-ca0f314fbaad" processor="mule:flow-ref" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute attributeName="name" whereValue="deleteServiceOrderById" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[null]" mediaType="application/json" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to delete:\service\order\(id):poc_nisc_service_delivery_cms_system_api_v4-config" doc:id="b4c86035-30cf-4d8f-8f1c-88bcddf85f4f" name="delete:\service\order\(id):poc_nisc_service_delivery_cms_system_api_v4-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call setOrderIdVaribleFromURIId" doc:id="d3ea8c43-0f22-4aff-9284-440c9112d8df" processor="mule:flow-ref">
+				<munit-tools:with-attributes>
+					<munit-tools:with-attribute attributeName="name" whereValue="setOrderIdVaribleFromURIId" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify call deleteServiceOrderById" doc:id="08494a9f-5f16-49ee-92bc-414060680e4a" processor="mule:flow-ref" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute attributeName="name" whereValue="deleteServiceOrderById" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify call Set null Payload" doc:id="48e4e013-2b1d-4f08-9cc9-6efd4294704b" processor="mule:set-payload" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute attributeName="doc:name" whereValue="Set null Payload" />
+					<munit-tools:with-attribute attributeName="value" whereValue="#[null]" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="GivenARequestServiceOrderAndIdWhenPutAServiceOrderByIdThenCallRightSteps" description="GivenARequestServiceOrderAndIdWhenPutAServiceOrderByIdThenCallRightSteps" doc:id="36d7a86a-5171-48a0-9129-7cac48f2d020" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock when call updateServiceOrderById" doc:id="0ea0a692-aee6-4817-a120-58f2ec11d1b5" processor="mule:flow-ref" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute attributeName="name" whereValue="updateServiceOrderById" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[vars.putUpdateServiceOrderResponse]" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="getUpdateServiceOrderRequestForTest" doc:id="cd202379-dd65-4ca5-9d56-dec47d0e6e2e" name="getUpdateServiceOrderRequestForTest" />
+			<flow-ref doc:name="Flow-ref to put:\service\order\(id):application\json:poc_nisc_service_delivery_cms_system_api_v4-config" doc:id="b2477ac4-0042-4c2c-af27-1bd44ad60231" name="put:\service\order\(id):application\json:poc_nisc_service_delivery_cms_system_api_v4-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:verify-call doc:name="Verify call setOrderIdVaribleFromURIId" doc:id="00a48205-eef7-45d6-a3ca-e1cb63c3dd63" processor="mule:flow-ref">
+				<munit-tools:with-attributes>
+					<munit-tools:with-attribute attributeName="name" whereValue="setOrderIdVaribleFromURIId" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify call updateServiceOrderById" doc:id="e69a9e8a-3626-47a4-82c4-50c807747a85" processor="mule:flow-ref" >
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute attributeName="name" whereValue="updateServiceOrderById" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
