@@ -142,95 +142,114 @@ output application/json
 				<ee:set-variable variableName="expectedGellAllServiceOrdersByFilterResponse" ><![CDATA[%dw 2.0
 output application/json
 ---
-[  
-   {  
-      id:1234,
-      state:"Active",
-      serviceSpecification:{  
-         id:"conferenceBridgeEquipment",
-         href:"http://serverlocation:port/catalogManagement/serviceSpecification /conferenceBridgeEquipment"
-      },
-      serviceCharacteristic:[  
-         {  
-            name:"numberOfVc500Units",
-            value:"1"
-         },
-         {  
-            name:"numberOfVc100Units",
-            value:"2"
-         },
-         {  
-            name:"routerType",
-            value:"CiscoASR1000"
-         },
-         {  
-            name:"powerSupply",
-            value:"UK"
-         }
-      ],
-      links:[  
-         {  
-            rel:"/linkrels/service/order/info",
-            uri:"/service/order/1234",
-            method:"GET"
-         },
-         {  
-            rel:"/linkrels/service/order/updateInfo",
-            uri:"/service/order/1234",
-            method:"PUT"
-         },
-         {  
-            rel:"/linkrels/service/order/delete",
-            uri:"/service/order/1234",
-            method:"DELETE"
-         }
-      ]
-   },
-   {  
-      id:5678,
-      state:"Active",
-      serviceSpecification:{  
-         id:"conferenceBridgeEquipment",
-         href:"http://serverlocation:port/catalogManagement/serviceSpecification /conferenceBridgeEquipment"
-      },
-      serviceCharacteristic:[  
-         {  
-            name:"numberOfVc500Units",
-            value:"1"
-         },
-         {  
-            name:"numberOfVc100Units",
-            value:"2"
-         },
-         {  
-            name:"routerType",
-            value:"CiscoASR1000"
-         },
-         {  
-            name:"powerSupply",
-            value:"UK"
-         }
-      ],
-      links:[  
-         {  
-            rel:"/linkrels/service/order/info",
-            uri:"/service/order/5678",
-            method:"GET"
-         },
-         {  
-            rel:"/linkrels/service/order/updateInfo",
-            uri:"/service/order/5678",
-            method:"PUT"
-         },
-         {  
-            rel:"/linkrels/service/order/delete",
-            uri:"/service/order/5678",
-            method:"DELETE"
-         }
-      ]
-   }
+[
+  {
+    id: 1234,
+    href: "",
+    name: "",
+    description: "",
+    "type": "",
+    version: "",
+    state: "Active",
+    serviceSpecification: {
+      id: "conferenceBridgeEquipment",
+      href: "http://serverlocation:port/catalogManagement/serviceSpecification /conferenceBridgeEquipment"
+    },
+    serviceCharacteristic: [
+      {
+        name: "numberOfVc500Units",
+        value: "1"
+      }, 
+      {
+        name: "numberOfVc100Units",
+        value: "2"
+      }, 
+      {
+        name: "routerType",
+        value: "CiscoASR1000"
+      }, 
+      {
+        name: "powerSupply",
+        value: "UK"
+      }
+    ],
+    serviceRelationship: [],
+    relatedParty: [],
+    supportingService: [],
+    supportingResource: [],
+    links: [
+      {
+        rel: "/linkrels/service/order/info",
+        uri: "/service/order/1234",
+        method: "GET"
+      }, 
+      {
+        rel: "/linkrels/service/order/updateInfo",
+        uri: "/service/order/1234",
+        method: "PUT"
+      }, 
+      {
+        rel: "/linkrels/service/order/delete",
+        uri: "/service/order/1234",
+        method: "DELETE"
+      }
+    ]
+  }, 
+  {
+    id: 5678,
+    href: "",
+    name: "",
+    description: "",
+    "type": "",
+    version: "",
+    state: "Active",
+    serviceSpecification: {
+      id: "conferenceBridgeEquipment",
+      href: "http://serverlocation:port/catalogManagement/serviceSpecification /conferenceBridgeEquipment"
+    },
+    serviceCharacteristic: [
+      {
+        name: "numberOfVc500Units",
+        value: "1"
+      }, 
+      {
+        name: "numberOfVc100Units",
+        value: "2"
+      }, 
+      {
+        name: "routerType",
+        value: "CiscoASR1000"
+      }, 
+      {
+        name: "powerSupply",
+        value: "UK"
+      }
+    ],
+    serviceRelationship: [],
+    relatedParty: [],
+    supportingService: [],
+    supportingResource: [],
+    links: [
+      {
+        rel: "/linkrels/service/order/info",
+        uri: "/service/order/5678",
+        method: "GET"
+      }, 
+      {
+        rel: "/linkrels/service/order/updateInfo",
+        uri: "/service/order/5678",
+        method: "PUT"
+      }, 
+      {
+        rel: "/linkrels/service/order/delete",
+        uri: "/service/order/5678",
+        method: "DELETE"
+      }
+    ]
+  }
 ]]]></ee:set-variable>
-			</ee:variables>
+			
+</ee:variables>
 		</ee:transform>
 	</sub-flow>
 	<sub-flow name="setExpectedVarErrorMessage500" doc:id="e4656473-63c8-4f13-9bba-edf78ccce2c6" >

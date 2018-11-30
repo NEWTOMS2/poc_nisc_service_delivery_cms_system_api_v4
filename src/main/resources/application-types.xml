@@ -1,4 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
-  <types:catalog/>
+  <types:catalog>
+    <types:type name="javaArray" format="java">
+      <types:shape format="java" element="java.util.ArrayList"/>
+    </types:type>
+  </types:catalog>
 </types:mule>
