@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:http="http://www.mulesoft.org/schema/mule/http"
+<mule xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
 	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
 	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd 
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd 
 		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
@@ -13,7 +15,11 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
 	<munit:config name="http_post_service_order_error_msg_api-test-suite.xml" />
 	<http:request-config name="HTTP_API_TEST_Request_configuration" doc:name="HTTP Request configuration" doc:id="da91855d-8c83-4663-956c-e2ad4f1d6b87" basePath="/api" >
-		<http:request-connection host="localhost" port="8081" />
+		<http:request-connection host="localhost" port="8082" protocol="HTTPS">
+			<tls:context>
+				<tls:trust-store insecure="true"/>
+			</tls:context>
+		</http:request-connection>
 	</http:request-config>
 	<munit:before-test name="http_post_service_order_error_msg_api-test-suiteBefore_Test" description="Before tests actions" doc:id="ca45b8de-c66d-484c-9240-dcad761de105" >
 		<flow-ref doc:name="setExpectedVarErrorMessage400" doc:id="bf11ab7c-6110-4ca7-994d-77caaa441e57" name="setExpectedVarErrorMessage400"/>
@@ -23,17 +29,6 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		<flow-ref doc:name="setExpectedVarErrorMessage415" doc:id="dc4a224a-1129-4c6b-8ed5-e3657f039562" name="setExpectedVarErrorMessage415"/>
 		<flow-ref doc:name="setExpectedVarErrorMessage500" doc:id="bb5be9aa-c7e3-4b5d-ba57-91ad7221118c" name="setExpectedVarErrorMessage500"/>
 	</munit:before-test>
-	<munit:test name="http_post_service_order_error_msg_api-test-suiteTest" description="MUnit Test" doc:id="e5cc6fd4-69a7-493c-9ff0-be507bfe7fa5" ignore="true">
-		<munit:enable-flow-sources >
-			<munit:enable-flow-source value="poc_nisc_service_delivery_cms_system_api_v4-main" />
-			<munit:enable-flow-source value="post:\service\order:application\json:poc_nisc_service_delivery_cms_system_api_v4-config" />
-		</munit:enable-flow-sources>
-		<munit:execution >
-			<flow-ref doc:name="getCreateServiceRequestForTest" doc:id="9a17ad16-9b73-464d-ba9c-3eab85c11b5e" name="getCreateServiceRequestForTest"/>
-			<http:request method="POST" doc:name="Request" doc:id="9fb2465d-b808-4234-9550-a2fd83f1853b" config-ref="HTTP_API_TEST_Request_configuration" path="/service/order"/>
-			<logger level="INFO" doc:name="Logger" doc:id="609cadb5-d385-4491-9d77-7e0bb0e3d03d" message="Response: #[payload]"/>
-		</munit:execution>
-	</munit:test>
 	<munit:test name="FuntionalTest-GivenANullCreateServiceOrderWhenPostRequestToServiceOrderAPIThenReturnA415ErrorMessage" description="FuntionalTest-GivenANullCreateServiceOrderWhenPostRequestToServiceOrderAPIThenReturnA415ErrorMessage" doc:id="9e0f82ca-9158-42ad-b927-90db37e7307b">
 		<munit:enable-flow-sources >
 			<munit:enable-flow-source value="poc_nisc_service_delivery_cms_system_api_v4-main" />
